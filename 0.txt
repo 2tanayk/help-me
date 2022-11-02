@@ -1,0 +1,35 @@
+## data preprocessing 
+
+import numpy as np
+import pandas as pd
+import os
+
+data=pd.read_csv("prepro.csv");
+
+
+x=data.iloc[:,:-1].values
+y=data.iloc[:,-1].values
+
+#fill null values
+data['Age']=data['Age'].fillna(data['Age'].mean())
+data['Salary']=data['Salary'].fillna(data['Salary'].mean())
+
+
+#label encoding and ordinal encoding
+
+from sklearn import preprocessing
+
+label_encoder=preprocessing.LabelEncoder()
+data['Purchased']=label_encoder.fit_transform(data['Purchased'])
+
+data2=pd.read_csv('cars.csv')
+
+print(data2['transmission'].unique())
+print(data2['owner'].unique())
+
+from sklearn.preprocessing import LabelEncoder,OrdinalEncoder
+
+le=LabelEncoder()
+data2['transmission']=le.fit_transform(data2['transmission'])
+oe=OrdinalEncoder(categories=[['Test Drive Car','First Owner','Second Owner','Third Owner','Fourth & Above Owner']], dtype=int)
+data2[['owner']] = oe.fit_transform(data2[['owner']])
