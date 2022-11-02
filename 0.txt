@@ -33,3 +33,13 @@ le=LabelEncoder()
 data2['transmission']=le.fit_transform(data2['transmission'])
 oe=OrdinalEncoder(categories=[['Test Drive Car','First Owner','Second Owner','Third Owner','Fourth & Above Owner']], dtype=int)
 data2[['owner']] = oe.fit_transform(data2[['owner']])
+
+from sklearn.preprocessing import MinMaxScaler
+
+for col in data2:
+    mx=MinMaxScaler()
+    data2[col]=mx.fit_transform(data2[[col]])
+    
+
+
+
